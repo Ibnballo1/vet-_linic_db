@@ -31,6 +31,7 @@ begin;
 update animals
 set species = 'pokemon'
 where name not like '%mon';
+commit;
 
 select * from animals;
 
