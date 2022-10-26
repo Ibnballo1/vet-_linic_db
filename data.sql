@@ -12,3 +12,40 @@ VALUES (1, 'Agumon', '2020-02-03', 0, true, 10.23),
 (9, 'Boarmon', '2005-06-07', 7, true, -20.4),
 (10, 'Blossom', '1998-10-13', 3, true, 17),
 (11, 'Ditto', '2022-05-14', 4, true, 22);
+
+-- Transactions
+begin;
+update animals
+set species = 'unspecified';
+select species from animals;
+rollback;
+select species from animals;
+
+begin;
+update animals
+set species = 'digimon'
+where name like '%mon';
+commit;
+
+begin;
+update animals
+set species = 'pokemon'
+where name not like '%mon';
+
+select * from animals;
+
+begin;
+delete from animals;
+rollback;
+select * from animals;
+
+begin;
+delete from animals where date_of_birth > '2022-01-01';
+savepoint my_savepoint;
+update animals
+set weight_kg = weight_kg * -1;
+rollback to my_savepoint;
+update animals
+set weight_kg = weight_kg * -1;
+where weight_kg < 0;
+commit;

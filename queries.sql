@@ -9,42 +9,6 @@ SELECT * from animals WHERE neutered = true;
 SELECT * from Animal22 WHERE name <> 'Gabumon';
 SELECT * FROM animals WHERE weight_kg BETWEEN 10.4 AND 17.3;
 
--- Transactions
-begin;
-update animals
-set species = 'unspecified';
-select species from animals;
-rollback;
-select species from animals;
-
-begin;
-update animals
-set species = 'digimon'
-where name like '%mon';
-
-begin;
-update animals
-set species = 'pokemon'
-where name not like '%mon';
-
-select * from animals;
-
-begin;
-delete from animals;
-rollback;
-select * from animals;
-
-begin;
-delete from animals where date_of_birth > '2022-01-01';
-savepoint my_savepoint;
-update animals
-set weight_kg = weight_kg * -1;
-rollback to my_savepoint;
-update animals
-set weight_kg = weight_kg * -1;
-where weight_kg < 0;
-commit;
-
 -- AGGREGATE FUNCTIONS AND GROUP BY
 -- How many animals are there?
 select count(name)
