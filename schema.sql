@@ -14,17 +14,15 @@ CREATE TABLE animals (
 ALTER TABLE animals
 ADD species varchar(100);
 
- create table owners (
-  id int not null,
+ CREATE TABLE OWNERS (
+  id BIGSERIAL PRIMARY KEY NOT NULL,
   full_name varchar(250),
-  age int,
-  primary key (id)
+  age int
 );
 
 create table species (
-  id int not null,
-  name varchar(250),
-  primary key (id)
+  id BIGSERIAL PRIMARY KEY NOT NULL,
+  name varchar(250)
 );
 
 ALTER TABLE animals

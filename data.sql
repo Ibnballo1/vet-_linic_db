@@ -50,3 +50,42 @@ update animals
 set weight_kg = weight_kg * -1;
 where weight_kg < 0;
 commit;
+
+--- For more tables
+INSERT INTO owners (full_name, age)
+VALUES
+('Sam Smith', 34),
+('Jennifer Orwell', 19),
+('Bob', 45),
+('Melody Pond', 77),
+('Dean Winchester', 14),
+('Jodie Whittaker', 38);
+
+INSERT INTO species(name)
+VALUES
+('Pokemon'),
+('dIGIMON');
+
+UPDATE animals
+SET species_id = '2'
+WHERE name LIKE '%mon';
+
+UPDATE animals
+SET owner_id = (SELECT id FROM owners WHERE full_name LIKE 'Sam Smith') 
+WHERE name = 'Agumon';
+
+UPDATE animals
+SET owner_id = (SELECT id FROM owners WHERE full_name LIKE 'Jennifer Orwell')
+WHERE name IN ('Gabumon',  'Pikachu');
+
+UPDATE animals
+SET owner_id = (SELECT id FROM owners WHERE full_name LIKE 'Bob')
+WHERE name IN ('Devimon', 'Plantmon');
+
+UPDATE animals
+SET owner_id = (SELECT id FROM owners WHERE full_name LIKE 'Melody Pond')
+WHERE name IN ('Charmander', 'Squirtle', 'Blossom');
+
+UPDATE animals
+SET owner_id = (SELECT id FROM owners WHERE full_name LIKE 'Dean Winchester')
+WHERE name IN ('Angemon', 'Boarmon');
