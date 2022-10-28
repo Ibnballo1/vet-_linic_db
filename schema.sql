@@ -36,3 +36,21 @@ ADD species_id INT REFERENCES species(id);
 
 ALTER TABLE animals
 ADD owner_id INT REFERENCES owners(id);
+
+CREATE TABLE vets (
+  id BIGSERIAL PRIMARY KEY NOT NULL,
+  name varchar(250),
+  age int,
+  date_of_graduation date
+);
+
+CREATE TABLE specialization(
+    vets_id INT REFERENCES vets(id),
+    species_id INT REFERENCES species(id)
+);
+
+CREATE TABLE visits (
+    animals_id INT REFERENCES animals(id),
+    vets_id INT REFERENCES vets(id),
+    date_of_visit DATE
+);
